@@ -8,4 +8,4 @@ All 16 predefined numerical consistency checks passed. The reproduced held-out S
 
 Archived stability estimates: mean pairwise Spearman = 0.9652504850938761; mean Kendall = 0.8689356257953765; mean top-five Jaccard = 0.5095238095238095.
 
-The original archived reference files in the parent RELAX_Global_SHAP directory have been retained unchanged. This reproduction demonstrates agreement with the recorded software versions and archived numerical outputs, but does not establish complete identity of the historical environment because the original NumPy and SciPy versions were not recorded.
+The archived reference files in the parent RELAX_Global_SHAP directory have been retained unchanged. This reproduction demonstrates agreement with the recorded software versions and archived numerical outputs, but does not establish complete identity of the historical environment because the original NumPy and SciPy versions were not recorded.
