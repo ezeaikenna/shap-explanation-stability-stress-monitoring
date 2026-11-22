@@ -1,6 +1,5 @@
 The following row-level or participant-linked files are excluded from the public repository release:
 RELAX_Global_SHAP/Numerical_Reproduction/RELAX_global_SHAP_heldout_values.csv
-RELAX_Global_SHAP/Numerical_Reproduction/SHA256SUMS.txt
 RELAX_Global_SHAP/RELAX_global_SHAP_heldout_values.csv
 RELAX_Participant_Level/RELAX_local_SHAP_observation_stability.csv
 RELAX_Participant_Level/RELAX_local_SHAP_participant_stability.csv
@@ -8,5 +7,4 @@ RELAX_Participant_Level/RELAX_local_SHAP_values.npy
 SSAQS_Global_SHAP/SSAQS_global_SHAP_heldout_values.csv
 SSAQS_Global_SHAP/SSAQS_global_SHAP_oof_predictions.csv
 SSAQS_Global_SHAP/SSAQS_prediction_comparison.csv
-
 Notebook cell outputs were cleared while executable source cells were retained.
