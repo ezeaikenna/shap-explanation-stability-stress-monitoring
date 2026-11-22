@@ -1,6 +1,6 @@
 # SHAP Explanation Stability — Computational Materials
 
-This repository provides computational materials supporting the separate SSAQS and RELAX analyses reported in the associated research manuscript. It contains analysis scripts and notebooks, software and model metadata, fold-level and aggregate results, figures, and numerical comparison documentation.
+This repository provides computational materials supporting the separate SSAQS and RELAX analyses reported in the associated research manuscript. It contains analysis scripts and notebooks, software and model metadata, fold-level and aggregate results, figures, and numerical comparison results.
 
 The repository is organised into three principal analysis components:
 
