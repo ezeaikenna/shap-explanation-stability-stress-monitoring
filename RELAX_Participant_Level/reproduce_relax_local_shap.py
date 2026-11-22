@@ -179,7 +179,8 @@ def main():
         })
     summary = pd.DataFrame(summaries)
 
-    # Pseudonymise participant identifiers in exported derived files.
+    # Replace direct participant IDs with within-run pseudonymous codes. These exports remain
+    # participant/observation-linked (including row indices and timestamps) and are not anonymous.
     codes = {pid: f"P{i+1:02d}" for i, pid in enumerate(sorted(np.unique(groups)))}
     obs_export = obs_df.copy()
     obs_export["participant_code"] = obs_export["participant_id"].map(codes)
@@ -188,8 +189,8 @@ def main():
     part_export["participant_code"] = part_export["participant_id"].map(codes)
     part_export = part_export.drop(columns=["participant_id"])
 
-    obs_export.to_csv(out / "RELAX_local_SHAP_observation_stability_anonymised.csv", index=False)
-    part_export.to_csv(out / "RELAX_local_SHAP_participant_stability_anonymised.csv", index=False)
+    obs_export.to_csv(out / "RELAX_local_SHAP_observation_stability_pseudonymised.csv", index=False)
+    part_export.to_csv(out / "RELAX_local_SHAP_participant_stability_pseudonymised.csv", index=False)
     pd.DataFrame(fold_log).to_csv(out / "RELAX_local_SHAP_fold_allocation_summary.csv", index=False)
     pd.DataFrame({"aligned_feature": feature_names}).to_csv(out / "RELAX_local_SHAP_feature_schema.csv", index=False)
     summary.to_csv(out / "RELAX_local_SHAP_stability_summary.csv", index=False)
