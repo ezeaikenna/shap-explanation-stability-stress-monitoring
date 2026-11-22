@@ -1,33 +1,37 @@
 {
   "analysis": "SSAQS global SHAP stability",
-  "source_file": "SSAQS_modelling_table_timezone_safe_v2.csv",
+  "source_file": "SSAQS_modelling_table_timezone_safe_v2_REFERENCE.csv",
   "source_sha256": "cfeade054717031fe56874516f123a68634953ba1e92252f025617279d2e705b",
-  "model": {
-    "type": "RandomForestRegressor",
+  "rf_config": {
     "n_estimators": 300,
     "min_samples_leaf": 5,
     "max_features": 0.8,
     "random_state": 20261009,
     "n_jobs": -1
   },
-  "validation": {
-    "method": "participant-held-out five-fold allocation from primary prediction evaluation",
-    "folds": 5
+  "prediction_agreement": {
+    "maximum_absolute_difference": 3.552713678800501e-14,
+    "mean_absolute_difference": 3.382919079359765e-15,
+    "correlation": 1,
+    "n_matched_observations": 3098
   },
-  "prediction_comparison": {
-    "matched_observations": 3098,
-    "maximum_absolute_difference": 2.84e-14,
-    "mean_absolute_difference": 3.5e-15,
-    "correlation": 1.0
-  },
-  "preprocessing": "Numeric median imputation with missingness indicators and StandardScaler; categorical most-frequent imputation and one-hot encoding.",
-  "software": {
-    "python": "3.13.16",
-    "numpy": "2.4.6",
-    "pandas": "2.2.3",
-    "scikit_learn": "1.6.1",
-    "shap": "0.54.1"
-  },
+  "python_version": "3.13.16 (main, Oct  1 2026, 15:40:24) [GCC 13.3.0]",
+  "numpy_version": "2.4.6",
+  "pandas_version": "2.2.3",
+  "sklearn_version": "1.6.1",
+  "shap_version": "0.54.1",
+  "n_splits": 5,
+  "fold_assignment": "verified frozen participant-to-fold mapping recovered by exact reproduction of archived PHASE I OOF predictions",
+  "fold_sizes": [
+    627,
+    634,
+    602,
+    627,
+    608
+  ],
+  "seed": 20261009,
+  "preprocessing": "numeric median imputation + missing indicators + StandardScaler; categorical most-frequent imputation + one-hot encoding",
+  "target": "next observed questionnaire self-reported stress",
   "predictors": [
     "previous_self_reported_stress",
     "previous_self_reported_anxiety",
@@ -35,13 +39,14 @@
     "steps_records_24h",
     "steps_sum_24h",
     "activity_records_24h",
-    "activity_level_mode_24h",
     "oxygen_records_24h",
     "oxygen_mean_24h_valid85plus",
     "oxygen_records_below85_24h",
     "oxygen_records_24h_total",
     "sleep_records_48h",
     "sleep_overall_score_last_48h",
-    "sleep_deep_minutes_last_48h"
-  ]
+    "sleep_deep_minutes_last_48h",
+    "activity_level_mode_24h"
+  ],
+  "note": "Use the version-matched timezone-safe reference table (SHA-256 cfeade054717031fe56874516f123a68634953ba1e92252f025617279d2e705b); do not substitute the reconstructed table. SSAQS is analysed independently; no cross-dataset transfer or external validation was performed."
 }
