@@ -1,0 +1,14 @@
+RELAX GLOBAL SHAP ANALYSIS REPORT
+
+Dataset: 31 participants; 1,148 observations.
+Model: Random Forest, 400 trees, min_samples_leaf=5, max_features=0.8.
+Validation: five participant-held-out folds. Fold-specific random seeds are listed in analysis_metadata.json and RELAX_global_SHAP_fold_summary.csv.
+
+GLOBAL STABILITY
+Mean pairwise Spearman: 0.9652504851
+Median pairwise Spearman: 0.9637501188
+Mean Kendall: 0.8689356258
+Mean top-five Jaccard: 0.5095238095
+Number of fold pairs: 10
+
+This analysis describes global explanation stability within RELAX. It is not an external validation of SSAQS and does not involve transfer of models or explanations between datasets.

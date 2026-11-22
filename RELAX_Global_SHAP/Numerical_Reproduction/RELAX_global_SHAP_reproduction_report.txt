@@ -1,0 +1,48 @@
+RELAX GLOBAL SHAP — NOTEBOOK-BASED NUMERICAL REPRODUCTION
+=======================================================
+NUMERICAL REPRODUCTION SUMMARY: all 16 predefined consistency checks passed. The recorded Python, pandas, scikit-learn and SHAP versions match the original records; the original NumPy and SciPy versions were not documented. Reproduced and archived numerical comparisons agree as documented below.
+
+ENVIRONMENT
+{
+  "python": "3.13.18",
+  "python_full": "3.13.18 (main, Oct 26 2026, 15:28:15) [GCC 13.3.0]",
+  "platform": "Linux-6.6.159+-x86_64-with-glibc2.39",
+  "numpy": "2.4.6",
+  "pandas": "3.1.1",
+  "scipy": "1.16.3",
+  "scikit_learn": "1.9.1",
+  "shap": "0.54.1"
+}
+
+ARCHIVED MEAN PAIRWISE METRICS
+{
+  "spearman_rank_correlation": 0.9652504850938761,
+  "kendall_rank_correlation": 0.8689356257953765,
+  "top_5_jaccard": 0.5095238095238095
+}
+
+RERUN MEAN PAIRWISE METRICS
+{
+  "spearman_rank_correlation": 0.9652504850938761,
+  "kendall_rank_correlation": 0.8689356257953765,
+  "top_5_jaccard": 0.5095238095238095
+}
+
+PREDEFINED CONSISTENCY CHECKS
+                                                check  passed                                                           detail
+            Fold 1: no train/test participant overlap    True                       train participants=25; test participants=6
+            Fold 2: no train/test participant overlap    True                       train participants=25; test participants=6
+            Fold 3: no train/test participant overlap    True                       train participants=25; test participants=6
+            Fold 4: no train/test participant overlap    True                       train participants=25; test participants=6
+            Fold 5: no train/test participant overlap    True                       train participants=24; test participants=7
+No participant appears in more than one held-out fold    True       GroupKFold held-out participant sets are mutually disjoint
+             All eligible rows explained exactly once    True                               SHAP rows=1148; eligible rows=1148
+                      All held-out SHAP values finite    True                                     SHAP matrix shape=(1148, 59)
+                    Expected 400-tree RF in all folds    True                                               400 trees per fold
+                  Fold sizes match archived reference    True                           Train/test rows and participant counts
+                  Fold seeds match archived reference    True                                 Expected seeds 20261014–20261018
+                  Input hash matches frozen reference    True 864b0c9b52f123088f46d932b2daf5bb7410c7932fb5e0e233d6e5c51c5ee5ac
+                        Recorded python version match    True                                current=3.13.18; recorded=3.13.18
+                        Recorded pandas version match    True                                    current=3.1.1; recorded=3.1.1
+                  Recorded scikit_learn version match    True                                    current=1.9.1; recorded=1.9.1
+                          Recorded shap version match    True                                  current=0.54.1; recorded=0.54.1

@@ -1,0 +1,17 @@
+RELAX PARTICIPANT-LEVEL LOCAL SHAP ANALYSIS
+
+Dataset: 1,148 observations from 31 participants (analysis-ready input SHA-256 recorded in analysis_metadata.json).
+Design: five independently shuffled repetitions of five participant-grouped folds (25 Random Forest fits).
+Model: 400 trees, min_samples_leaf=5, max_features=0.8; participant-balanced training weights.
+SHAP: TreeExplainer with tree_path_dependent feature perturbation; no separate background dataset was supplied.
+Bootstrap: 10,000 participant-level resamples, seed 20261014.
+
+PREPROCESSING
+Missingness-indicator columns and median-imputation values were determined separately within each training partition. The training-derived transformation was applied unchanged to its corresponding held-out observations. Each of the 25 training folds selected 25 missingness indicators.
+
+REPORTED ESTIMATES
+Absolute-SHAP rank agreement: mean 0.9385334768; median 0.9371286913; 95% participant-bootstrap CI 0.9357316817–0.9414416457.
+Signed-SHAP cosine similarity: mean 0.9063853827; median 0.9121745025; 95% participant-bootstrap CI 0.8961730411–0.9157041315.
+
+DATA AND REPRODUCIBILITY
+The original RELAX questionnaire response workbook and analysis-ready CSV are not redistributed in this archive. The table-construction script expects the original workbook with MFB, IFB and AFB worksheets. The public archive contains the analysis script, metadata, fold-level preprocessing summaries, aggregate stability summaries and figures. Observation-level predictions, participant-coded local-stability records and participant-level SHAP arrays are not included in this public copy. Running the analysis script will generate row-level outputs in the specified output directory; those generated files must be treated as restricted research data and must not be committed to a public repository or shared without a separate disclosure review.

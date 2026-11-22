@@ -1,0 +1,6 @@
+fold,train_rows,test_rows,train_participants,test_participants,n_estimators,min_samples_leaf,max_features,random_state,numeric_scaler
+1,2471,627,28,7,300,5,0.8,20261009,StandardScaler
+2,2464,634,28,7,300,5,0.8,20261009,StandardScaler
+3,2496,602,28,7,300,5,0.8,20261009,StandardScaler
+4,2471,627,28,7,300,5,0.8,20261009,StandardScaler
+5,2490,608,28,7,300,5,0.8,20261009,StandardScaler

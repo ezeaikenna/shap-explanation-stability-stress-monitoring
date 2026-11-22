@@ -1,0 +1,6 @@
+dataset,fold,train_rows,test_rows,train_participants,test_participants,n_estimators,seed
+RELAX,1,914,234,25,6,400,20261014
+RELAX,2,914,234,25,6,400,20261015
+RELAX,3,921,227,25,6,400,20261016
+RELAX,4,922,226,25,6,400,20261017
+RELAX,5,921,227,24,7,400,20261018

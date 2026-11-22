@@ -1,0 +1,66 @@
+{
+  "analysis": "RELAX global SHAP numerical reproduction",
+  "source_method": "RELAX global section of PHASE_III_Model_Aligned_SHAP_Stability_FIXED.ipynb",
+  "input_file": "RELAX_next_morning_stress_dataset.csv",
+  "input_sha256": "864b0c9b52f123088f46d932b2daf5bb7410c7932fb5e0e233d6e5c51c5ee5ac",
+  "input_shape": [
+    1148,
+    37
+  ],
+  "participants": 31,
+  "predictors_before_missing_indicators": 34,
+  "rf": {
+    "n_estimators": 400,
+    "min_samples_leaf": 5,
+    "max_features": 0.8,
+    "n_jobs": -1
+  },
+  "n_splits": 5,
+  "top_k": 5,
+  "seed_base": 20261013,
+  "fold_seeds": [
+    20261014,
+    20261015,
+    20261016,
+    20261017,
+    20261018
+  ],
+  "environment": {
+    "python": "3.13.18",
+    "python_full": "3.13.18 (main, Oct 26 2026, 15:28:15) [GCC 13.3.0]",
+    "platform": "Linux-6.6.159+-x86_64-with-glibc2.39",
+    "numpy": "2.4.6",
+    "pandas": "3.1.1",
+    "scipy": "1.16.3",
+    "scikit_learn": "1.9.1",
+    "shap": "0.54.1"
+  },
+  "recorded_original_environment": {
+    "python": "3.13.18",
+    "pandas": "3.1.1",
+    "scikit_learn": "1.9.1",
+    "shap": "0.54.1",
+    "numpy": null,
+    "scipy": null
+  },
+  "version_matches": {
+    "python": true,
+    "pandas": true,
+    "scikit_learn": true,
+    "shap": true
+  },
+  "reproduction_status": "NUMERICAL REPRODUCTION SUMMARY: all 16 predefined consistency checks passed. Python, pandas, scikit-learn and SHAP match all historically recorded software versions; held-out SHAP attribution values, fold-level feature-importance estimates, aggregated feature summaries and pairwise stability metrics match the archived reference outputs. Original NumPy and SciPy versions were not recorded; complete identity of the historical software environment therefore cannot be established.",
+  "integrity_checks_passed": 16,
+  "integrity_checks_total": 16,
+  "archived_reference_files_are_immutable": true,
+  "numerical_comparison": {
+    "heldout_shap_attribution_entries": "exact match",
+    "fold_feature_importance_comparisons": "295 exact matches",
+    "aggregated_feature_summaries": "59 exact matches",
+    "pairwise_stability_comparisons": "10 exact matches",
+    "mean_pairwise_spearman": 0.9652504851,
+    "mean_pairwise_kendall": 0.8689356258,
+    "mean_top_five_jaccard": 0.5095238095,
+    "maximum_prediction_absolute_difference": 1.7763568394002505e-15
+  }
+}

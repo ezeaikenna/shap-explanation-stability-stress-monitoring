@@ -1,0 +1,7 @@
+RELAX analysis-ready table construction details
+Rows: 1,148
+Participants: 31
+Columns: 37
+SHA-256: 864b0c9b52f123088f46d932b2daf5bb7410c7932fb5e0e233d6e5c51c5ee5ac
+The reconstructed table matched the analysis-ready CSV used for the participant-level local-SHAP analysis.
+The original questionnaire response workbook is not redistributed.

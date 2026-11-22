@@ -1,0 +1,18 @@
+SSAQS GLOBAL SHAP STABILITY ANALYSIS
+
+Dataset: 35 participants; 3,098 eligible observations; 14 predictors.
+Model: Random Forest, 300 trees, min_samples_leaf=5, max_features=0.8, random_state=20261009.
+Validation design: five participant-held-out folds using the participant-to-fold allocation from the primary prediction evaluation.
+Preprocessing: numeric median imputation with missingness indicators and StandardScaler; categorical most-frequent imputation and one-hot encoding.
+
+GLOBAL STABILITY
+Mean pairwise Spearman: 0.9512262487
+Median pairwise Spearman: 0.9498988799
+Mean Kendall: 0.8378813705
+Mean top-five Jaccard: 0.5714285714
+Number of fold pairs: 10
+
+PREDICTION COMPARISON
+All 3,098 observations were matched to the primary out-of-fold predictions by participant identifier and questionnaire timestamp. Maximum absolute difference: 3.552713678800501e-14; mean absolute difference: 3.382919079359765e-15; correlation: 1.000.
+
+The analysis describes within-dataset global explanation stability. It does not test cross-dataset transfer or external validation.

@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: >-
+  If you use the software and computational materials in this repository,
+  please cite the associated manuscript. Add the version-specific Zenodo DOI
+  to this citation file after the first public archival release.
+title: >-
+  Global and Participant-Level SHAP Explanation Stability in Longitudinal
+  Stress Prediction: Separate Analyses of SSAQS and RELAX
+type: software
+authors:
+  - family-names: Ezea
+    given-names: Leonard Ikenna
