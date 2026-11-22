@@ -221,3 +221,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# Restricted RELAX analysis inputs and generated participant-linked outputs
+/RELAX_next_morning_stress_dataset.csv
+/RELAX_Participant_Level/RELAX_next_morning_stress_dataset.csv
+/outputs/
+/RELAX_Participant_Level/outputs/
+**/RELAX_local_SHAP_observation_stability_pseudonymised.csv
+**/RELAX_local_SHAP_participant_stability_pseudonymised.csv
+**/RELAX_local_SHAP_values.npy
+
+**/RELAX_next_morning_stress_dataset.csv
