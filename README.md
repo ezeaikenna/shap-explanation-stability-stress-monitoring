@@ -7,10 +7,10 @@ This repository contains privacy-minimised computational materials for the separ
 - `SSAQS_Global_SHAP/`: SSAQS global SHAP notebook, fold-level and aggregate summaries, metadata and figures.
 - `RELAX_Global_SHAP/`: RELAX global SHAP results and numerical reproduction results.
 - `RELAX_Participant_Level/`: RELAX participant-level analysis and table-construction scripts, requirements, fold-level preprocessing summaries, aggregate stability results and figures.
-- `RESULTS_INDEX.txt`: principal estimates and reproduction notes.
+- `RESULTS_INDEX.txt`: principal estimates and numerical reproduction results.
 - `README_Computational_Materials.txt`: detailed scope, inputs, methods and limitations.
-- `PUBLIC_RELEASE_EXCLUSIONS.txt`: records intentionally omitted from this public copy.
-- `SHA256SUMS.txt`: file-integrity manifest.
+- `PUBLIC_RELEASE_EXCLUSIONS.txt`: files intentionally omitted from this repository.
+- `SHA256SUMS.txt`: SHA-256 checksums for the listed repository files.
 
 ## Data access
 
@@ -21,7 +21,7 @@ The original SSAQS and RELAX datasets and the RELAX questionnaire workbook are n
 
 ## Privacy and release scope
 
-Observation-level predictions and SHAP exports, participant-coded local-stability records, participant-level SHAP arrays and related row-level files are intentionally excluded. Notebook cell outputs were cleared while executable source cells were retained. See `PUBLIC_RELEASE_EXCLUSIONS.txt`. This is a privacy-minimised research-code and results collection. Confirm that retained materials comply with source-data providers’ redistribution terms and applicable institutional requirements before public distribution. Running the participant-level script generates row-level outputs that are not part of this public package; do not commit those generated outputs.
+Observation-level predictions and SHAP exports, participant-coded local-stability records, participant-level SHAP arrays and related row-level files are excluded to reduce disclosure risk. Notebook cell outputs were cleared while executable source cells were retained. See `PUBLIC_RELEASE_EXCLUSIONS.txt`. Running the participant-level script generates row-level outputs that are not included in this repository; treat those generated files as restricted research data and do not publish or share them without an appropriate disclosure review.
 
 ## Important interpretation limits
 
@@ -29,4 +29,4 @@ The reported SHAP values are predictive attributions, not causal effects. The an
 
 ## Citation
 
-A `CITATION.cff` file is provided with the software title and author metadata. The repository release has not yet been published and no software DOI is assigned. After a public GitHub release is created and archived in Zenodo, update the citation metadata and manuscript Data Availability Statement with the verified version-specific archive DOI. Do not cite a DOI until Zenodo has minted and verified it.
+A `CITATION.cff` file provides the software title and author metadata. No version-specific software DOI has been assigned. A version-specific citation can be added after a public release has been archived in Zenodo and its DOI has been verified.
