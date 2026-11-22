@@ -23,3 +23,12 @@ This is the proposed first versioned release of the privacy-minimised computatio
 ### Interpretation limits
 
 The analyses are separate within-dataset studies. They do not involve cross-dataset model or explanation transfer, or external validation. SHAP values are predictive attributions, not causal effects. The materials do not establish clinical validity or unrestricted generalisability.
+
+### Final package-audit correction
+
+The release review identified that the RELAX table-construction script can generate
+a row-level analysis table containing participant identifiers, timestamps and
+observed target values. This generated file and the participant-level script
+outputs are explicitly identified as restricted in `PUBLIC_RELEASE_EXCLUSIONS.txt`.
+Protective `.gitignore` rules were added to reduce the risk of accidental commits.
+These safeguards do not replace a manual review of generated files before any upload.
