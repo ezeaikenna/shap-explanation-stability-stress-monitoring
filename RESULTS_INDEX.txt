@@ -16,17 +16,17 @@ RELAX participant-level local stability
 
 Values are reported to six decimal places here; full precision is available in the CSV summaries.
 
-RELAX GLOBAL SHAP NUMERICAL REPRODUCTION
+RELAX global SHAP numerical reproduction
 - Notebook execution: all 16 predefined numerical consistency checks passed.
 - Reproduced held-out SHAP attribution entries, fold-feature importance comparisons, aggregated feature summaries and pairwise stability comparisons matched the archived numerical results.
 - Prediction maximum absolute difference: 1.7763568394002505e-15.
 - Software environment: Python 3.13.18; NumPy 2.4.6; pandas 3.1.1; SciPy 1.16.3; scikit-learn 1.9.1; SHAP 0.54.1.
 - Original NumPy and SciPy versions were not recorded. See RELAX_Global_SHAP/Numerical_Reproduction/.
 
-RELAX PARTICIPANT-LEVEL ANALYSIS
-- Five repetitions x five participant-grouped folds = 25 fits.
+RELAX participant-level analysis
+- Five repetitions × five participant-grouped folds = 25 fits.
 - No participant overlap between training and held-out partitions in any fold.
 - All 1,148 observations evaluated in each repetition; 31 participants represented.
-- The same 25 missingness indicators were selected in all 25 folds; selection remained fold-contained.
+- All the same 25 missingness indicators were selected in all 25 folds; selection remained fold-contained.
 - Participant-linked and observation-level exports are excluded from this repository.
 - Analysis environment: Python 3.13.16; pandas 2.2.3; scikit-learn 1.6.1; SHAP 0.54.1.
