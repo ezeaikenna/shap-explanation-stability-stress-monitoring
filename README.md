@@ -12,12 +12,12 @@ This repository contains privacy-minimised computational materials for the separ
 - `PUBLIC_RELEASE_EXCLUSIONS.txt`: files intentionally omitted from this repository.
 - `generate_sha256_manifest.py`: regenerates `SHA256SUMS.txt` for the current repository contents.
 
-## Data access
+## Data access and source licences
 
-- SSAQS dataset record: https://doi.org/10.5281/zenodo.18706837 (dataset descriptor: https://doi.org/10.1038/s41597-026-07085-7).
-- RELAX dataset record cited in the published Data Descriptor: https://doi.org/10.5281/zenodo.18693288 (dataset descriptor: https://doi.org/10.1038/s41597-026-07711-4). This is the source-record identifier used here; do not substitute a separately indexed or later linked record unless the exact downloaded input version is verified against it.
+- SSAQS dataset record: https://doi.org/10.5281/zenodo.18706837 (dataset descriptor: https://doi.org/10.1038/s41597-026-07085-7). The dataset is identified as CC BY 4.0 in the source record.
+- RELAX dataset concept DOI: https://doi.org/10.5281/zenodo.18693288 (dataset descriptor: https://doi.org/10.1038/s41597-026-07711-4). The Zenodo Version 2 record inspected for this repository is https://zenodo.org/records/20701999; its Rights panel identifies the dataset licence as Creative Commons Attribution 4.0 International (CC BY 4.0).
 
-The original SSAQS and RELAX datasets and the RELAX questionnaire workbook are not redistributed here. Obtain them from their source repositories and follow the source providers' access conditions and licences. The analysis scripts require the corresponding source inputs; this repository does not contain every input needed for a complete end-to-end rerun.
+The original SSAQS and RELAX datasets and the RELAX questionnaire workbook are not redistributed here. Obtain them from their source repositories and follow the source providers' access conditions and licences. The analysis scripts require the corresponding source inputs; this repository does not contain every input needed for a complete end-to-end rerun. The RELAX record's displayed licence does not authorise publication of participant-linked analysis outputs or other restricted research records.
 
 ## Privacy and release scope
 
