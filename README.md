@@ -21,7 +21,7 @@ The original SSAQS and RELAX datasets and the RELAX questionnaire workbook are n
 
 ## Privacy and release scope
 
-Observation-level predictions and SHAP exports, participant-coded local-stability records, participant-level SHAP arrays and related row-level files are excluded to reduce disclosure risk. Notebook cell outputs were cleared while executable source cells were retained. See `PUBLIC_RELEASE_EXCLUSIONS.txt`. Running the participant-level script generates row-level outputs that are not included in this repository; treat those generated files as restricted research data and do not publish or share them without an appropriate disclosure review.
+Observation-level predictions and SHAP exports, participant-coded local-stability records, participant-level SHAP arrays and related row-level files are excluded to reduce disclosure risk. Notebook cell outputs were cleared while executable source cells were retained. See `PUBLIC_RELEASE_EXCLUSIONS.txt`. Running the participant-level script generates row-level outputs that are not included in this repository; treat those generated files as restricted research data and do not publish or share them without an appropriate disclosure review. The RELAX table-construction script generates `RELAX_next_morning_stress_dataset.csv`, which contains participant identifiers, timestamps, observed target values and row-level predictors. This generated table is restricted research data and must not be committed or redistributed; the repository .gitignore includes protective rules for it and the participant-level script outputs. See `PUBLIC_RELEASE_EXCLUSIONS.txt`.
 
 ## Important interpretation limits
 
