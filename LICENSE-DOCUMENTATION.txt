@@ -1,0 +1,27 @@
+Documentation and other original non-software text in this repository are
+licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0)
+Licence.
+
+You may share and adapt those materials for any purpose, including
+commercially, provided that you give appropriate credit, provide a link to
+the licence, and indicate whether changes were made.
+
+Full legal code:
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+SCOPE AND EXCLUSIONS
+
+This notice applies only to original documentation and other original
+non-software text authored for this repository by Leonard Ikenna Ezea.
+
+It does not relicense or grant additional rights to:
+- SSAQS, RELAX, or any other third-party dataset or source material;
+- third-party software, libraries, code, or other materials;
+- materials owned by other authors or institutions;
+- participant-linked, observation-level, confidential, or otherwise
+  restricted research records, whether or not referenced by the repository.
+
+Those materials remain subject to their own rights, licences, access
+conditions, and applicable institutional or legal requirements. A copy of
+this notice does not grant permission to redistribute source datasets or
+restricted research records.
