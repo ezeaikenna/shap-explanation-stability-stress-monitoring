@@ -27,6 +27,13 @@ Observation-level predictions and SHAP exports, participant-coded local-stabilit
 
 The reported SHAP values are predictive attributions, not causal effects. The analyses do not establish clinical validity, external generalisability, or robustness to arbitrary input perturbations. The RELAX local-stability analysis compares the same observations across repeated participant-grouped model fits; it is not a measure of within-model explainer stochasticity.
 
+## Licences
+
+- Original software code authored for this repository is licensed under the MIT License; see `LICENSE`.
+- Original documentation and other original non-software text authored for this repository are licensed under CC BY 4.0; see `LICENSE-DOCUMENTATION.txt`.
+
+These licences do not apply to third-party datasets, source materials, third-party code, or restricted participant-linked and observation-level research records. Those materials remain subject to their own rights, licences, access conditions and applicable requirements. In particular, neither licence grants permission to redistribute the SSAQS or RELAX source datasets or restricted research records.
+
 ## Citation
 
-A `CITATION.cff` file provides the software title and author metadata. No version-specific software DOI has been assigned. A version-specific citation can be added after a public release has been archived in Zenodo and its DOI has been verified.
+A `CITATION.cff` file provides the software title and author metadata. No version-specific software DOI has been assigned. A version-specific citation can be added after a release has been archived in Zenodo and its DOI has been verified.
