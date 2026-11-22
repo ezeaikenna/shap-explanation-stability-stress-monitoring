@@ -10,7 +10,7 @@ This repository contains privacy-minimised computational materials for the separ
 - `RESULTS_INDEX.txt`: principal estimates and numerical reproduction results.
 - `README_Computational_Materials.txt`: detailed scope, inputs, methods and limitations.
 - `PUBLIC_RELEASE_EXCLUSIONS.txt`: files intentionally omitted from this repository.
-- `SHA256SUMS.txt`: SHA-256 checksums for the listed repository files.
+- `generate_sha256_manifest.py`: regenerates `SHA256SUMS.txt` for the current repository contents.
 
 ## Data access
 
