@@ -8,6 +8,9 @@ These materials contain analysis notebooks and scripts, model and software-versi
 ### Privacy-Related Exclusions
 The repository excludes observation-level prediction and SHAP exports, observation-level local-stability records, participant-coded local-stability records, and the participant-level SHAP value array. These files contained row-level or participant-linked information, including participant identifiers or codes, row indices, timestamps, observed targets, predictions, or individual attribution vectors. Aggregate participant-level stability estimates are retained because they do not contain the excluded observation-level or participant-coded records. Notebook cell outputs were cleared while executable source cells were retained.
 
+The table-construction script also generates `RELAX_next_morning_stress_dataset.csv`, a row-level analysis table containing participant identifiers, target timestamps, observed target values and predictors. This generated table is restricted research data and must not be committed or redistributed. The repository `.gitignore` includes protective rules for this file and for the participant-level script's generated `outputs/` directory. See `PUBLIC_RELEASE_EXCLUSIONS.txt` for the restricted output inventory.
+
+
 ### Contents
 1. `SSAQS_Global_SHAP/` — analysis notebook, metadata, fold-level and aggregate SHAP summaries, pairwise stability estimates and figures.
 2. `RELAX_Global_SHAP/` — fold summaries, fold-level feature-importance summaries, pairwise stability estimates and figures. `Numerical_Reproduction/` contains the notebook-based numerical reproduction and comparison results.
