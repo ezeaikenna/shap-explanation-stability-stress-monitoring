@@ -188,7 +188,7 @@ class ReleaseTests(unittest.TestCase):
 
 
     def test_invalid_utf8_structured_content_fails_closed(self):
-        result = release_check.inspect_structured_content("export.csv", b"\\xff,score\\nP01,0.4\\n")
+        result = release_check.inspect_structured_content("export.csv", b"\xff,score\nP01,0.4\n")
         self.assertEqual(result, "invalid UTF-8 encoding")
 
     @unittest.skipUnless(shutil.which("git"), "Git unavailable")
@@ -196,7 +196,7 @@ class ReleaseTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
             subprocess.run(["git", "init", "-q", str(root)], check=True)
-            (root / "export.csv").write_bytes(b"\\xff,score\\nP01,0.4\\n")
+            (root / "export.csv").write_bytes(b"\xff,score\nP01,0.4\n")
             subprocess.run(["git", "-C", str(root), "add", "export.csv"], check=True)
             found, note = release_check.staged_findings(root)
             self.assertIsNone(note)
