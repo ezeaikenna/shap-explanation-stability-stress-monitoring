@@ -49,7 +49,7 @@ def inspect_structured_content(path_text: str, data: bytes) -> str | None:
     suffix = Path(path_text).suffix.lower()
     if suffix not in DATA_SUFFIXES: return None
     try: text = data.decode("utf-8-sig")
-    except UnicodeDecodeError: return None
+    except UnicodeDecodeError: return "invalid UTF-8 encoding"
     fields: list[str] = []
     try:
         if suffix in {".csv", ".tsv"}:
@@ -91,9 +91,12 @@ def scan_worktree(root: Path) -> list[str]:
         reason=is_blocked_path(rel.as_posix())
         if reason: findings.append(reason)
         elif p.is_file() and p.suffix.lower() in DATA_SUFFIXES:
-            try: content_reason=inspect_structured_content(rel.as_posix(), p.read_bytes())
-            except OSError: content_reason=None
-            if content_reason: findings.append(f"{rel.as_posix()}: {content_reason}")
+            try:
+                content_reason = inspect_structured_content(rel.as_posix(), p.read_bytes())
+            except OSError as exc:
+                content_reason = f"could not read structured file ({exc.__class__.__name__})"
+            if content_reason:
+                findings.append(f"{rel.as_posix()}: {content_reason}")
     return sorted(set(findings))
 
 
@@ -113,41 +116,68 @@ def staged_findings(root: Path) -> tuple[list[str], str | None]:
         reason=is_blocked_path(path)
         if reason: found.append("staged " + reason); continue
         blob=subprocess.run(["git","-C",str(root),"show",f":{path}"],capture_output=True)
-        if blob.returncode == 0:
-            content_reason=inspect_structured_content(path, blob.stdout)
-            if content_reason: found.append(f"staged {path}: {content_reason}")
+        if blob.returncode != 0:
+            found.append(f"staged {path}: could not read staged Git blob")
+            continue
+        content_reason=inspect_structured_content(path, blob.stdout)
+        if content_reason: found.append(f"staged {path}: {content_reason}")
     return found, None
 
 
 def history_findings(root: Path) -> tuple[list[str], str | None]:
-    """Inspect reachable local Git history for blocked paths and structured blobs.
+    """Inspect every reachable commit tree path and each structured blob.
 
-    Uses `git rev-list --objects --all`, so only objects reachable from refs
-    present in this local clone are covered. Fetch remote branches first when
-    they must be included. Binary formats and semantic disclosure are out of scope.
+    Tree paths are enumerated per commit, independently of blob deduplication,
+    so the same blob stored under ordinary and restricted paths cannot hide
+    the restricted path. Only commits reachable from local refs are covered.
     """
     if not git_root(root): return [], "Not a Git worktree; history scan skipped."
-    p=subprocess.run(["git","-C",str(root),"rev-list","--objects","--all"],capture_output=True,text=True)
-    if p.returncode: return [], "Git history object scan failed."
-    found=[]
-    seen=set()
-    for line in p.stdout.splitlines():
-        if not line.strip(): continue
-        pieces=line.split(" ",1)
-        oid=pieces[0]
-        path=pieces[1] if len(pieces)>1 else ""
-        if path:
-            reason=is_blocked_path(path)
-            if reason: found.append("historical " + reason)
-        if not path or oid in seen or Path(path).suffix.lower() not in DATA_SUFFIXES:
+    commits = subprocess.run(
+        ["git", "-C", str(root), "rev-list", "--all"],
+        capture_output=True, text=True,
+    )
+    if commits.returncode:
+        return [], "Git history commit scan failed."
+    found = []
+    scanned_blobs = set()
+    for commit in commits.stdout.splitlines():
+        tree = subprocess.run(
+            ["git", "-C", str(root), "ls-tree", "-r", "-z", "--full-tree", commit],
+            capture_output=True,
+        )
+        if tree.returncode:
+            found.append(f"historical commit {commit[:12]}: could not enumerate tree")
             continue
-        seen.add(oid)
-        kind=subprocess.run(["git","-C",str(root),"cat-file","-t",oid],capture_output=True,text=True)
-        if kind.returncode or kind.stdout.strip() != "blob": continue
-        blob=subprocess.run(["git","-C",str(root),"cat-file","blob",oid],capture_output=True)
-        if blob.returncode: continue
-        content_reason=inspect_structured_content(path,blob.stdout)
-        if content_reason: found.append(f"historical {path}: {content_reason}")
+        for entry in tree.stdout.split(b"\0"):
+            if not entry:
+                continue
+            try:
+                metadata, raw_path = entry.split(b"\t", 1)
+                mode, kind, oid = metadata.decode("ascii").split()
+                path = raw_path.decode("utf-8", "surrogateescape")
+            except (ValueError, UnicodeDecodeError):
+                found.append(f"historical commit {commit[:12]}: unparseable tree entry")
+                continue
+            reason = is_blocked_path(path)
+            if reason:
+                found.append("historical " + reason)
+            suffix = Path(path).suffix.lower()
+            if kind != "blob" or suffix not in DATA_SUFFIXES:
+                continue
+            key = (oid, suffix)
+            if key in scanned_blobs:
+                continue
+            scanned_blobs.add(key)
+            blob = subprocess.run(
+                ["git", "-C", str(root), "cat-file", "blob", oid],
+                capture_output=True,
+            )
+            if blob.returncode:
+                found.append(f"historical {path}: could not read Git blob")
+                continue
+            content_reason = inspect_structured_content(path, blob.stdout)
+            if content_reason:
+                found.append(f"historical {path}: {content_reason}")
     return sorted(set(found)), None
 
 
