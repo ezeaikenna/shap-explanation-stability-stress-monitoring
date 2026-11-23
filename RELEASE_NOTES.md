@@ -31,7 +31,7 @@ The analyses are separate within-dataset studies. They do not involve cross-data
 - Added `check_public_release.py` as a supplementary pre-release check for known restricted paths and sensitive-looking structured-data fields.
 - Expanded `PUBLIC_RELEASE_EXCLUSIONS.txt` and updated the README instructions to explain safe local execution and pre-commit review.
 - No analysis code, numerical result tables, figures, or manuscript figures were changed in this maintenance update.
-- At this maintenance stage, the checker covered known restricted paths only. Later hardening entries below describe the subsequent staged-content and Git-history checks. The checker is not a privacy certification; institutional/privacy clearance and manual release review remain necessary.
+- At this maintenance stage, the checker covered known restricted paths only. Later hardening entries below describe the subsequent staged-content and Git-history checks. The checker is not a privacy certification; manual privacy, source-rights and disclosure review remain necessary.
 
 
 ## Release-safeguard hardening — 2026-11-22
