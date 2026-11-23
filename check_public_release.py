@@ -77,8 +77,8 @@ def inspect_structured_content(path_text: str, data: bytes) -> str | None:
                         return f"invalid JSONL record at line {line_number}"
             else:
                 walk(json.loads(text))
-    except Exception:
-        return None
+    except json.JSONDecodeError:
+        return "invalid JSON document"
     hits = sorted({f for f in fields if is_sensitive_field(f)})
     return "sensitive-looking structured field(s): " + ", ".join(hits) if hits else None
 

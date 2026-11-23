@@ -35,19 +35,19 @@ class ReleaseTests(unittest.TestCase):
     def test_csv_sensitive_header_detected(self):
         result = release_check.inspect_structured_content(
             "export.csv",
-            b"participant_id,timestamp,score\\nP01,2024-01-01,0.4\\n",
+            b"participant_id,timestamp,score\nP01,2024-01-01,0.4\n",
         )
         self.assertIn("participant_id", result)
         self.assertIn("timestamp", result)
 
     def test_aggregate_header_allowed(self):
         self.assertIsNone(release_check.inspect_structured_content(
-            "summary.csv", b"feature,mean_shap,rank\\nx,0.4,1\\n"
+            "summary.csv", b"feature,mean_shap,rank\nx,0.4,1\n"
         ))
 
     def test_camel_case_sensitive_headers_detected(self):
         result = release_check.inspect_structured_content(
-            "export.csv", b"participantId,rowIndex,score\\nP01,12,0.4\\n"
+            "export.csv", b"participantId,rowIndex,score\nP01,12,0.4\n"
         )
         self.assertIn("participantId", result)
         self.assertIn("rowIndex", result)
@@ -88,7 +88,7 @@ class ReleaseTests(unittest.TestCase):
             root = Path(d)
             subprocess.run(["git", "init", "-q", str(root)], check=True)
             f = root / "export.csv"
-            f.write_text("participant_id,timestamp,score\\nP01,2024-01-01,0.4\\n")
+            f.write_text("participant_id,timestamp,score\nP01,2024-01-01,0.4\n")
             subprocess.run(["git", "-C", str(root), "add", "export.csv"], check=True)
             f.unlink()
             found, note = release_check.staged_findings(root)
@@ -105,7 +105,7 @@ class ReleaseTests(unittest.TestCase):
             subprocess.run(["git", "-C", str(root), "config", "user.name",
                             "Test"], check=True)
             f = root / "archive_export.csv"
-            f.write_text("participant_id,timestamp,score\\nP01,2024-01-01,0.4\\n")
+            f.write_text("participant_id,timestamp,score\nP01,2024-01-01,0.4\n")
             subprocess.run(["git", "-C", str(root), "add", f.name], check=True)
             subprocess.run(["git", "-C", str(root), "commit", "-qm",
                             "add generic export"], check=True)
@@ -130,7 +130,7 @@ class ReleaseTests(unittest.TestCase):
             subprocess.run(["git", "-C", str(root), "config", "user.name",
                             "Test"], check=True)
             f = root / "RELAX_next_morning_stress_dataset.csv"
-            f.write_text("participant_id,timestamp,target\\nP01,2024-01-01,1\\n")
+            f.write_text("participant_id,timestamp,target\nP01,2024-01-01,1\n")
             subprocess.run(["git", "-C", str(root), "add", f.name], check=True)
             subprocess.run(["git", "-C", str(root), "commit", "-qm", "test"],
                            check=True)
@@ -153,16 +153,16 @@ class ReleaseTests(unittest.TestCase):
                             "Test"], check=True)
 
             tracked = root / "aggregate.csv"
-            tracked.write_bytes(b"feature,mean_shap\\nfeature_a,0.25\\n")
+            tracked.write_bytes(b"feature,mean_shap\nfeature_a,0.25\n")
             subprocess.run(["git", "-C", str(root), "add", "aggregate.csv"],
                            check=True)
 
             # Deliberately change the working tree without staging the change.
-            tracked.write_bytes(b"participant_id,timestamp\\nP01,2024-01-01\\n")
+            tracked.write_bytes(b"participant_id,timestamp\nP01,2024-01-01\n")
 
             entries = manifest_generator.generate_manifest(root)
             expected = hashlib.sha256(
-                b"feature,mean_shap\\nfeature_a,0.25\\n"
+                b"feature,mean_shap\nfeature_a,0.25\n"
             ).hexdigest()
             self.assertIn(f"{expected}  aggregate.csv", entries)
             self.assertNotIn(
@@ -172,6 +172,18 @@ class ReleaseTests(unittest.TestCase):
 
             manifest_text = (root / "SHA256SUMS.txt").read_text(encoding="utf-8")
             self.assertIn(f"{expected}  aggregate.csv", manifest_text)
+
+    def test_csv_sensitive_header_detected_with_real_multiline_content(self):
+        payload = b"participant_id,timestamp,score\nP01,2024-01-01,0.4\n"
+        result = release_check.inspect_structured_content("export.csv", payload)
+        self.assertIn("participant_id", result)
+        self.assertIn("timestamp", result)
+
+    def test_malformed_json_fails_closed(self):
+        result = release_check.inspect_structured_content(
+            "export.json", b'{"participantId":"P01",'
+        )
+        self.assertEqual(result, "invalid JSON document")
 
 
 if __name__ == "__main__":

@@ -64,3 +64,10 @@ The analyses are separate within-dataset studies. They do not involve cross-data
 ## JSONL inspection correction — 2026-11-23
 
 - Extended structured-content inspection to JSON Lines (.jsonl), parsing each nonblank record independently, detecting sensitive-looking fields in later records, and reporting malformed records as findings rather than silently ignoring them. Added regression tests for both behaviours.
+
+
+## JSON and CSV safeguard correction — 2026-11-23
+
+- Changed malformed JSON handling to report invalid JSON documents as findings instead of silently skipping structured-content inspection.
+- Corrected CSV regression fixtures to use actual newline characters and added explicit tests for multiline sensitive headers and malformed JSON.
+- Updated the checker status message to include JSONL in the supported historical structured-content formats.
