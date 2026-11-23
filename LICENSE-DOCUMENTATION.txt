@@ -17,11 +17,11 @@ non-software text authored for this repository by Leonard Ikenna Ezea.
 It does not relicense or grant additional rights to:
 - SSAQS, RELAX, or any other third-party dataset or source material;
 - third-party software, libraries, code, or other materials;
-- materials owned by other authors or institutions;
+- materials owned by other authors or rights holders;
 - participant-linked, observation-level, confidential, or otherwise
   restricted research records, whether or not referenced by the repository.
 
 Those materials remain subject to their own rights, licences, access
-conditions, and applicable institutional or legal requirements. A copy of
-this notice does not grant permission to redistribute source datasets or
-restricted research records.
+conditions, and applicable legal requirements. A copy of this notice does
+not grant permission to redistribute source datasets or restricted research
+records.
