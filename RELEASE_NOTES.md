@@ -60,3 +60,7 @@ The analyses are separate within-dataset studies. They do not involve cross-data
 - Removed the 2 MB truncation of JSON input before parsing, which could cause larger valid JSON files to be skipped when the truncated text was invalid.
 - Added regression tests for camelCase field names and JSON files larger than 2 MB.
 - These checks remain heuristic and do not inspect arbitrary values, all binary formats, or semantic disclosure risk. Manual privacy and disclosure review remains necessary.
+
+## JSONL inspection correction — 2026-11-23
+
+- Extended structured-content inspection to JSON Lines (.jsonl), parsing each nonblank record independently, detecting sensitive-looking fields in later records, and reporting malformed records as findings rather than silently ignoring them. Added regression tests for both behaviours.

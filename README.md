@@ -11,7 +11,7 @@ This repository contains privacy-minimised computational materials for the separ
 - `README_Computational_Materials.txt`: detailed scope, inputs, methods and limitations.
 - `PUBLIC_RELEASE_EXCLUSIONS.txt`: files intentionally omitted from this repository.
 - `generate_sha256_manifest.py`: regenerates `SHA256SUMS.txt` for the current repository contents.
-- `check_public_release.py`: checks known restricted paths and sensitive-looking fields in CSV, TSV and JSON data files before release.
+- `check_public_release.py`: checks known restricted paths and sensitive-looking fields in CSV, TSV, JSON and JSONL data files before release.
 
 ## Data access and source licences
 
@@ -35,9 +35,9 @@ git status --short
 git diff --cached --name-status
 ```
 
-When run inside a Git worktree, `check_public_release.py` also inspects staged file paths and staged CSV/TSV/JSON content. Use `python check_public_release.py --require-git` to require a Git worktree, and `python check_public_release.py --history` to inspect reachable local Git history for known restricted paths and sensitive-looking fields in historical CSV/TSV/JSON blobs. Fetch remote branches first; only refs present in the local clone are scanned.
+When run inside a Git worktree, `check_public_release.py` also inspects staged file paths and staged CSV/TSV/JSON/JSONL content. Use `python check_public_release.py --require-git` to require a Git worktree, and `python check_public_release.py --history` to inspect reachable local Git history for known restricted paths and sensitive-looking fields in historical CSV/TSV/JSON/JSONL blobs. Fetch remote branches first; only refs present in the local clone are scanned.
 
-The checker is a supplementary safeguard. It checks working-tree paths and structured CSV/TSV/JSON content, staged paths and staged structured content, and (with `--history`) reachable local Git history for blocked paths and structured-content fields. It does not inspect all binary formats, unreachable objects, unfetched remote refs or semantic disclosure risk. It is not a substitute for reviewing staged changes and obtaining institutional/privacy clearance. See `PUBLIC_RELEASE_EXCLUSIONS.txt` for the complete list of known exclusions.
+The checker is a supplementary safeguard. It checks working-tree paths and structured CSV/TSV/JSON/JSONL content, staged paths and staged structured content, and (with `--history`) reachable local Git history for blocked paths and structured-content fields. It does not inspect all binary formats, unreachable objects, unfetched remote refs or semantic disclosure risk. It is not a substitute for reviewing staged changes and obtaining institutional/privacy clearance. See `PUBLIC_RELEASE_EXCLUSIONS.txt` for the complete list of known exclusions.
 
 ## Important interpretation limits
 
