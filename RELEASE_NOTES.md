@@ -71,3 +71,12 @@ The analyses are separate within-dataset studies. They do not involve cross-data
 - Changed malformed JSON handling to report invalid JSON documents as findings instead of silently skipping structured-content inspection.
 - Corrected CSV regression fixtures to use actual newline characters and added explicit tests for multiline sensitive headers and malformed JSON.
 - Updated the checker status message to include JSONL in the supported historical structured-content formats.
+
+
+## Fail-closed scanning and historical path coverage — 2026-11-23
+
+- Structured CSV/TSV/JSON/JSONL files that contain invalid UTF-8 are now reported as findings rather than skipped.
+- Working-tree read failures and staged-blob read failures are reported as findings.
+- Historical scanning now enumerates paths in each reachable commit tree independently of blob deduplication, preventing a shared blob under an ordinary filename from hiding the same blob under a restricted filename.
+- Added regression tests for invalid UTF-8 in structured content and staged files, and for shared historical blobs under restricted paths.
+- The history scan remains limited to commits reachable from refs present in the local clone; fetch the intended remote branches before running it.
