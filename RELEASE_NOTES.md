@@ -1,8 +1,10 @@
 # Research Materials Release Notes
 
-## Proposed version 1.0.0 — Research materials
+## Version 1.0.0 — Research materials
 
-This proposed version presents the computational materials supporting the separate SSAQS and RELAX analyses of global and participant-level SHAP explanation stability. It is not a statement that a versioned archive or software DOI has already been published.
+Published 23 November 2026. The versioned research-materials archive is available at https://doi.org/10.5281/zenodo.24465081.
+
+This release presents the computational materials supporting the separate SSAQS and RELAX analyses of global and participant-level SHAP explanation stability.
 
 ### Included materials
 
@@ -30,4 +32,4 @@ The RELAX global numerical reproduction includes 16 predefined numerical consist
 
 Original software code authored for this repository is licensed under MIT. Original documentation and other original non-software text are licensed under CC BY 4.0. These licences do not extend to third-party datasets, source materials or restricted research records.
 
-Please cite the associated research manuscript when using these materials. A version-specific software DOI should be cited only after the corresponding archive and DOI have been created and verified.
+Version 1.0.0 citation: https://doi.org/10.5281/zenodo.24465081. Please also cite the associated research manuscript when using these materials.
