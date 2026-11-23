@@ -173,7 +173,7 @@ def main() -> int:
         for f in sorted(set(findings)): print(" - "+f)
         return 1
     print("PASS: no known restricted paths or sensitive-looking structured fields detected.")
-    print("NOTE: history scan is opt-in (--history) and inspects reachable local Git refs for blocked paths and CSV/TSV/JSON blob fields.")
+    print("NOTE: history scan is opt-in (--history) and inspects reachable local Git refs for blocked paths and CSV/TSV/JSON/JSONL blob fields.")
     print("NOTE: fetch remote branches first; unreachable objects, unfetched refs, other binary formats and semantic disclosure risk are not covered.")
     print("NOTE: this tool cannot establish anonymity, inspect every binary format, or replace human/institutional review.")
     return 0
