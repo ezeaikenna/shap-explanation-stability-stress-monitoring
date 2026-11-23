@@ -24,11 +24,39 @@ This is the proposed first versioned release of the privacy-minimised computatio
 
 The analyses are separate within-dataset studies. They do not involve cross-dataset model or explanation transfer, or external validation. SHAP values are predictive attributions, not causal effects. The materials do not establish clinical validity or unrestricted generalisability.
 
-### Final package-audit correction
 
-The release review identified that the RELAX table-construction script can generate
-a row-level analysis table containing participant identifiers, timestamps and
-observed target values. This generated file and the participant-level script
-outputs are explicitly identified as restricted in `PUBLIC_RELEASE_EXCLUSIONS.txt`.
-Protective `.gitignore` rules were added to reduce the risk of accidental commits.
-These safeguards do not replace a manual review of generated files before any upload.
+## Privacy-safeguard maintenance — 2026-11-22
+
+- Added research-specific `.gitignore` rules for known restricted SSAQS and RELAX generated outputs and local notebook workspaces.
+- Added `check_public_release.py` as a supplementary pre-release check for known restricted paths and sensitive-looking structured-data fields.
+- Expanded `PUBLIC_RELEASE_EXCLUSIONS.txt` and updated the README instructions to explain safe local execution and pre-commit review.
+- No analysis code, numerical result tables, figures, or manuscript figures were changed in this maintenance update.
+- At this maintenance stage, the checker covered known restricted paths only. Later hardening entries below describe the subsequent staged-content and Git-history checks. The checker is not a privacy certification; institutional/privacy clearance and manual release review remain necessary.
+
+
+## Release-safeguard hardening — 2026-11-22
+
+- Reviewed `RELAX_global_SHAP_run_metadata.json` and retained it as aggregate reproducibility metadata; it contains no participant identifiers, row-level records, timestamps or local filesystem paths.
+- Extended `check_public_release.py` to inspect known restricted paths in the working tree and staged Git additions, modifications, renames and copies when run inside a Git worktree.
+- Added regression tests for restricted participant-level output directories, local notebook workspaces, reviewed aggregate metadata, safe aggregate files and staged-index detection.
+- Updated release instructions to run the checker and regression tests before committing.
+- No research scripts, notebooks, numerical results, figures or manuscript content were changed.
+
+
+## Content and Git-history safeguard update — 2026-11-22
+
+- Expanded the release checker to inspect CSV/TSV headers and JSON keys for sensitive-looking participant, subject, user, record, timestamp and row-index fields, including staged Git blob content.
+- Extended optional `--history` scanning to inspect reachable local Git refs for known restricted paths and sensitive-looking fields in historical CSV/TSV/JSON blobs. Fetch remote branches before scanning; unfetched refs and other binary formats are outside scope.
+- Removed generated Python bytecode/cache directories from the distributable archive.
+- Added a regression test for sensitive structured content committed under a generic filename and later deleted.
+- Expanded regression coverage from five to eight tests, including generic-filename structured-content detection and historical restricted-path detection.
+- Updated release documentation to state supported formats and remaining limitations.
+- No scientific analysis, numerical result, figure or manuscript content was changed.
+
+
+## Structured-field detection refinement — 2026-11-22
+
+- Extended sensitive-field matching to recognise common camelCase variants such as `participantId` and `rowIndex`, in addition to underscore-, hyphen- and space-separated forms.
+- Removed the 2 MB truncation of JSON input before parsing, which could cause larger valid JSON files to be skipped when the truncated text was invalid.
+- Added regression tests for camelCase field names and JSON files larger than 2 MB.
+- These checks remain heuristic and do not inspect arbitrary values, all binary formats, or semantic disclosure risk. Manual privacy and disclosure review remains necessary.
