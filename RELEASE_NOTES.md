@@ -1,8 +1,8 @@
 # Research Materials Release Notes
 
-## Version 1.0.0 — Research materials
+## Proposed version 1.0.0 — Research materials
 
-This version presents the computational materials supporting the separate SSAQS and RELAX analyses of global and participant-level SHAP explanation stability.
+This proposed version presents the computational materials supporting the separate SSAQS and RELAX analyses of global and participant-level SHAP explanation stability. It is not a statement that a versioned archive or software DOI has already been published.
 
 ### Included materials
 
