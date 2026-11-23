@@ -205,7 +205,7 @@ def main() -> int:
     print("PASS: no known restricted paths or sensitive-looking structured fields detected.")
     print("NOTE: history scan is opt-in (--history) and inspects reachable local Git refs for blocked paths and CSV/TSV/JSON/JSONL blob fields.")
     print("NOTE: fetch remote branches first; unreachable objects, unfetched refs, other binary formats and semantic disclosure risk are not covered.")
-    print("NOTE: this tool cannot establish anonymity, inspect every binary format, or replace human/institutional review.")
+    print("NOTE: this tool cannot establish anonymity, inspect every binary format, or replace manual privacy and disclosure review.")
     return 0
 
 if __name__ == "__main__": raise SystemExit(main())
