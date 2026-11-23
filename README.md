@@ -39,4 +39,8 @@ These licences do not apply to third-party datasets, source materials, third-par
 
 ## Citation
 
-The `CITATION.cff` file provides the software title and author metadata. A version-specific software DOI should be added only after the corresponding archive has been created in Zenodo and its DOI verified.
+This repository's version 1.0.0 software archive is available from Zenodo:
+
+https://doi.org/10.5281/zenodo.24465081
+
+The `CITATION.cff` file provides the version-specific citation metadata. Please also cite the associated research manuscript when using these materials.
