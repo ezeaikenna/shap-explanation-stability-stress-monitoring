@@ -43,4 +43,4 @@ Mean absolute-SHAP rank agreement was 0.938533 (95% participant-bootstrap CI 0.9
 The same 25 missingness indicators were selected in all 25 folds in this analysis, although selection was performed independently within each training fold.
 
 ### Release Scope
-This repository is a privacy-minimised research-code and results collection. Before public distribution, confirm that retained materials comply with source-data providers' redistribution terms and applicable institutional requirements. The source dataset licences do not authorise publication of participant-linked analysis outputs or other restricted research records.
+This repository is a privacy-minimised research-code and results collection. Before public distribution, confirm that retained materials comply with source-data providers' access conditions and licences, and with applicable privacy, data-protection and disclosure requirements. The source dataset licences do not authorise publication of participant-linked analysis outputs or other restricted research records.
