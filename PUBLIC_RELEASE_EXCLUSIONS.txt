@@ -1,38 +1,38 @@
-# Restricted and local-only generated files
+# Data Availability, Privacy and Excluded Materials
 
-The following generated files and directories are intentionally excluded from this repository. They may contain observation-level, participant-linked, timestamped, target-bearing, prediction, attribution, or fold-allocation information. The names below describe outputs that must remain local unless a documented privacy and disclosure review explicitly authorises release.
+This repository does not redistribute source datasets or generated files that contain observation-level or participant-linked information. The exclusions below identify data products that are not included in the public research materials.
 
 ## RELAX analysis table and participant-level outputs
 
 - `RELAX_next_morning_stress_dataset.csv` (including copies in subdirectories): reconstructed modelling table containing participant-linked records, timestamps, outcomes and predictors.
-- `RELAX_Participant_Level/outputs/`: local output directory created by `reproduce_relax_local_shap.py`.
-- `RELAX_local_SHAP_observation_stability_pseudonymised.csv`: observation-level stability export.
-- `RELAX_local_SHAP_participant_stability_pseudonymised.csv`: participant-coded stability export.
+- `RELAX_Participant_Level/outputs/`: generated participant-level analysis outputs.
+- `RELAX_local_SHAP_observation_stability_pseudonymised.csv`: observation-level stability records.
+- `RELAX_local_SHAP_participant_stability_pseudonymised.csv`: participant-coded stability records.
 - `RELAX_local_SHAP_values.npy`: observation-level SHAP attribution array.
-- `RELAX_local_SHAP_fold_allocation_summary.csv`: fold allocation export.
-- `RELAX_local_SHAP_run_metadata.json`: run-level metadata generated alongside the restricted outputs.
+- `RELAX_local_SHAP_fold_allocation_summary.csv`: fold-allocation records.
+- `RELAX_local_SHAP_run_metadata.json`: metadata associated with the generated participant-level outputs.
 
 ## RELAX global analysis outputs
 
-- `RELAX_global_SHAP_heldout_values.csv`: held-out observation-level predictions/SHAP values.
-- `RELAX_global_SHAP_fold_audit.csv`: fold audit export; keep local unless separately reviewed.
-- `RELAX_global_SHAP_integrity_checks.csv`: run-generated integrity output; keep local with the run record.
-- `RELAX_Global_SHAP_Controlled_Notebook_Run/`: local notebook workspace containing extracted input data and reproduced outputs.
+- `RELAX_global_SHAP_heldout_values.csv`: held-out observation-level predictions and SHAP values.
+- `RELAX_global_SHAP_fold_audit.csv`: fold-level diagnostic records.
+- `RELAX_global_SHAP_integrity_checks.csv`: run-specific numerical and structural check results.
+- `RELAX_Global_SHAP_Controlled_Notebook_Run/`: local analysis workspace containing extracted input data and generated outputs.
 
 ## SSAQS global analysis outputs
 
-- `SSAQS_prediction_comparison.csv`: observation-level prediction comparison.
+- `SSAQS_prediction_comparison.csv`: observation-level prediction comparisons.
 - `SSAQS_global_SHAP_heldout_values.csv`: held-out observation-level SHAP values.
 - `SSAQS_global_SHAP_oof_predictions.csv`: observation-level out-of-fold predictions.
-- `SSAQS_Global_SHAP_Analysis/`: local notebook workspace containing extracted source data and generated outputs.
-- `SSAQS_Global_SHAP_outputs.zip`: archive of generated SSAQS outputs; may contain restricted records.
+- `SSAQS_Global_SHAP_Analysis/`: local analysis workspace containing extracted source data and generated outputs.
+- `SSAQS_Global_SHAP_outputs.zip`: archive of generated SSAQS outputs that may contain restricted records.
 
-## Privacy interpretation
+## Privacy considerations
 
-The RELAX participant-level pseudonymised exports remain participant- and observation-linked. Row indices, timestamps and combinations of attributes may permit linkage. Pseudonymisation is not anonymisation. Treat all generated row-level and participant-linked files as restricted research data unless an appropriate privacy and disclosure review explicitly authorises release.
+The RELAX participant-level pseudonymised exports remain linked to observations and participants. Row indices, timestamps and combinations of attributes may permit linkage; pseudonymisation does not, by itself, establish anonymisation. The SSAQS prediction-comparison and held-out exports contain participant- and time-linked predictions or SHAP information. The RELAX global held-out export contains participant-linked predictions and SHAP values.
 
-The SSAQS prediction-comparison and held-out exports contain participant/time-linked predictions or SHAP information. The RELAX global held-out export contains participant-linked predictions and SHAP values. Fold-audit and observation-level run-generated files are excluded conservatively pending review. The reviewed `RELAX_global_SHAP_run_metadata.json` is retained as aggregate reproducibility metadata: it records the input checksum, dataset dimensions, participant count, model configuration, software versions and aggregate numerical comparisons, but no participant identifiers, row-level records, timestamps or local filesystem paths. Other generated metadata files must be reviewed individually before release.
+The reviewed `RELAX_global_SHAP_run_metadata.json` is retained as aggregate computational metadata. It records the input checksum, dataset dimensions, participant count, model configuration, software versions and aggregate numerical comparisons, without participant identifiers, row-level records, timestamps or local filesystem paths. Other generated metadata should be assessed individually before any further distribution.
 
-Notebook cell outputs were cleared while executable source cells were retained. The notebooks and scripts can generate excluded files when run with the required source inputs. Do not commit generated restricted outputs to this repository.
+Notebook outputs have been cleared while executable source cells have been retained. Running the notebooks and scripts may regenerate some of the excluded files. The public repository therefore contains analysis procedures and aggregate findings, but not all intermediate data products.
 
-`.gitignore` contains research-specific exclusions for these generated files and workspaces. `check_public_release.py` checks known restricted paths in the working tree and, when run inside a Git worktree, staged additions/modifications/renames/copies. Regression tests are provided in `tests/test_public_release.py`. These safeguards reduce accidental inclusion. The checker inspects CSV/TSV/JSON/JSONL fields in the working tree and staged blobs, and its optional history mode inspects reachable local Git refs for blocked paths and structured-content fields. It does not inspect every binary format, unreachable objects, unfetched remote refs or semantic disclosure risk, and it does not replace privacy and disclosure review, disclosure control or human inspection of staged changes.
+These exclusions reduce the risk of disclosing participant-linked information. They do not establish that all possible disclosure risks have been eliminated.
