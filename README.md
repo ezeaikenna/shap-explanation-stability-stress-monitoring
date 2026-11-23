@@ -11,6 +11,7 @@ This repository contains privacy-minimised computational materials for the separ
 - `README_Computational_Materials.txt`: detailed scope, inputs, methods and limitations.
 - `PUBLIC_RELEASE_EXCLUSIONS.txt`: files intentionally omitted from this repository.
 - `generate_sha256_manifest.py`: regenerates `SHA256SUMS.txt` for the current repository contents.
+- `check_public_release.py`: checks known restricted paths and sensitive-looking fields in CSV, TSV, JSON and JSONL data files before release.
 
 ## Data access and source licences
 
@@ -21,7 +22,22 @@ The original SSAQS and RELAX datasets and the RELAX questionnaire workbook are n
 
 ## Privacy and release scope
 
-Observation-level predictions and SHAP exports, participant-coded local-stability records, participant-level SHAP arrays and related row-level files are excluded to reduce disclosure risk. Notebook cell outputs were cleared while executable source cells were retained. See `PUBLIC_RELEASE_EXCLUSIONS.txt`. Running the participant-level script generates row-level outputs that are not included in this repository; treat those generated files as restricted research data and do not publish or share them without an appropriate disclosure review.
+Observation-level predictions and SHAP exports, participant-coded local-stability records, participant-level SHAP arrays and related row-level files are excluded to reduce disclosure risk. Notebook cell outputs were cleared while executable source cells were retained. See `PUBLIC_RELEASE_EXCLUSIONS.txt`.
+
+**Local execution can generate restricted files.** In particular, the RELAX table-construction script creates `RELAX_next_morning_stress_dataset.csv`; the participant-level script writes row-level and participant-coded exports under its `outputs/` directory; and the SSAQS/RELAX notebooks create held-out predictions, SHAP exports and local run workspaces. These files must remain outside version control unless a documented privacy and disclosure review authorises their release. The research-specific rules in `.gitignore` exclude the known generated paths.
+
+Before committing or packaging changes, run:
+
+```bash
+python check_public_release.py
+python -m unittest discover -s tests -v
+git status --short
+git diff --cached --name-status
+```
+
+When run inside a Git worktree, `check_public_release.py` also inspects staged file paths and staged CSV/TSV/JSON/JSONL content. Use `python check_public_release.py --require-git` to require a Git worktree, and `python check_public_release.py --history` to inspect reachable local Git history for known restricted paths and sensitive-looking fields in historical CSV/TSV/JSON/JSONL blobs. Fetch remote branches first; only refs present in the local clone are scanned.
+
+The checker is a supplementary safeguard. It checks working-tree paths and structured CSV/TSV/JSON/JSONL content, staged paths and staged structured content, and (with `--history`) every path in reachable local Git commit trees plus structured-content blobs. Unreadable or invalidly encoded structured files are reported as findings rather than silently skipped. It does not inspect all binary formats, unreachable objects, unfetched remote refs or semantic disclosure risk. It is not a substitute for reviewing staged changes and obtaining institutional/privacy clearance. See `PUBLIC_RELEASE_EXCLUSIONS.txt` for the complete list of known exclusions.
 
 ## Important interpretation limits
 

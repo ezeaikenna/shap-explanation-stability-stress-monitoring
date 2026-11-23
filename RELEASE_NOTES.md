@@ -23,3 +23,60 @@ This is the proposed first versioned release of the privacy-minimised computatio
 ### Interpretation limits
 
 The analyses are separate within-dataset studies. They do not involve cross-dataset model or explanation transfer, or external validation. SHAP values are predictive attributions, not causal effects. The materials do not establish clinical validity or unrestricted generalisability.
+
+
+## Privacy-safeguard maintenance — 2026-11-22
+
+- Added research-specific `.gitignore` rules for known restricted SSAQS and RELAX generated outputs and local notebook workspaces.
+- Added `check_public_release.py` as a supplementary pre-release check for known restricted paths and sensitive-looking structured-data fields.
+- Expanded `PUBLIC_RELEASE_EXCLUSIONS.txt` and updated the README instructions to explain safe local execution and pre-commit review.
+- No analysis code, numerical result tables, figures, or manuscript figures were changed in this maintenance update.
+- At this maintenance stage, the checker covered known restricted paths only. Later hardening entries below describe the subsequent staged-content and Git-history checks. The checker is not a privacy certification; institutional/privacy clearance and manual release review remain necessary.
+
+
+## Release-safeguard hardening — 2026-11-22
+
+- Reviewed `RELAX_global_SHAP_run_metadata.json` and retained it as aggregate reproducibility metadata; it contains no participant identifiers, row-level records, timestamps or local filesystem paths.
+- Extended `check_public_release.py` to inspect known restricted paths in the working tree and staged Git additions, modifications, renames and copies when run inside a Git worktree.
+- Added regression tests for restricted participant-level output directories, local notebook workspaces, reviewed aggregate metadata, safe aggregate files and staged-index detection.
+- Updated release instructions to run the checker and regression tests before committing.
+- No research scripts, notebooks, numerical results, figures or manuscript content were changed.
+
+
+## Content and Git-history safeguard update — 2026-11-22
+
+- Expanded the release checker to inspect CSV/TSV headers and JSON keys for sensitive-looking participant, subject, user, record, timestamp and row-index fields, including staged Git blob content.
+- Extended optional `--history` scanning to inspect reachable local Git refs for known restricted paths and sensitive-looking fields in historical CSV/TSV/JSON blobs. Fetch remote branches before scanning; unfetched refs and other binary formats are outside scope.
+- Removed generated Python bytecode/cache directories from the distributable archive.
+- Added a regression test for sensitive structured content committed under a generic filename and later deleted.
+- Expanded regression coverage from five to eight tests, including generic-filename structured-content detection and historical restricted-path detection.
+- Updated release documentation to state supported formats and remaining limitations.
+- No scientific analysis, numerical result, figure or manuscript content was changed.
+
+
+## Structured-field detection refinement — 2026-11-22
+
+- Extended sensitive-field matching to recognise common camelCase variants such as `participantId` and `rowIndex`, in addition to underscore-, hyphen- and space-separated forms.
+- Removed the 2 MB truncation of JSON input before parsing, which could cause larger valid JSON files to be skipped when the truncated text was invalid.
+- Added regression tests for camelCase field names and JSON files larger than 2 MB.
+- These checks remain heuristic and do not inspect arbitrary values, all binary formats, or semantic disclosure risk. Manual privacy and disclosure review remains necessary.
+
+## JSONL inspection correction — 2026-11-23
+
+- Extended structured-content inspection to JSON Lines (.jsonl), parsing each nonblank record independently, detecting sensitive-looking fields in later records, and reporting malformed records as findings rather than silently ignoring them. Added regression tests for both behaviours.
+
+
+## JSON and CSV safeguard correction — 2026-11-23
+
+- Changed malformed JSON handling to report invalid JSON documents as findings instead of silently skipping structured-content inspection.
+- Corrected CSV regression fixtures to use actual newline characters and added explicit tests for multiline sensitive headers and malformed JSON.
+- Updated the checker status message to include JSONL in the supported historical structured-content formats.
+
+
+## Fail-closed scanning and historical path coverage — 2026-11-23
+
+- Structured CSV/TSV/JSON/JSONL files that contain invalid UTF-8 are now reported as findings rather than skipped.
+- Working-tree read failures and staged-blob read failures are reported as findings.
+- Historical scanning now enumerates paths in each reachable commit tree independently of blob deduplication, preventing a shared blob under an ordinary filename from hiding the same blob under a restricted filename.
+- Added regression tests for invalid UTF-8 in structured content and staged files, and for shared historical blobs under restricted paths.
+- The history scan remains limited to commits reachable from refs present in the local clone; fetch the intended remote branches before running it.

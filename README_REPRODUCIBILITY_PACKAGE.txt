@@ -13,3 +13,8 @@ The supplied materials support inspection of the analysis procedures, examinatio
 Observation-level prediction and SHAP exports, participant-coded local-stability records and participant-level SHAP value arrays have been excluded to reduce disclosure risk. Aggregate results and supporting documentation are retained.
 
 For detailed descriptions of the analysis materials, software environments, source-data requirements and reproduction limitations, consult `README_Computational_Materials.txt`. For the specific files excluded from the repository, consult `PUBLIC_RELEASE_EXCLUSIONS.txt`.
+
+
+## Safe execution and release check
+
+Running the notebooks and scripts may create local, observation-level or participant-linked outputs that are intentionally not included in this package. The project-specific `.gitignore` rules exclude the known restricted generated files and local analysis workspaces. Before committing or preparing a release, run `python check_public_release.py` and `python -m unittest discover -s tests -v`, inspect `git status --short`, and review every staged file. Inside a Git worktree, the checker examines known file/directory names and sensitive-looking field names in CSV/TSV/JSON/JSONL files, including staged versions. Run `python check_public_release.py --history` to inspect reachable local Git refs for known restricted paths and sensitive-looking fields in historical CSV/TSV/JSON/JSONL blobs. Fetch remote branches first; unfetched refs and other binary formats are not covered. The checker does not inspect all binary formats, remote branches or semantic disclosure risk, and it does not replace institutional privacy/disclosure review. See `PUBLIC_RELEASE_EXCLUSIONS.txt`.

@@ -221,3 +221,38 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ---------------------------------------------------------------------------
+# Research-specific privacy and release protections
+# ---------------------------------------------------------------------------
+# Source-derived RELAX modelling table: contains participant-linked records,
+# timestamps, outcomes and predictors. Never commit this generated table.
+/RELAX_next_morning_stress_dataset.csv
+**/RELAX_next_morning_stress_dataset.csv
+
+# Participant-level analysis exports: row-level/participant-linked records,
+# individual SHAP arrays, fold allocation exports and run-level metadata.
+/RELAX_Participant_Level/outputs/
+/RELAX_Participant_Level/**/outputs/
+**/RELAX_local_SHAP_observation_stability_pseudonymised.csv
+**/RELAX_local_SHAP_participant_stability_pseudonymised.csv
+**/RELAX_local_SHAP_values.npy
+**/RELAX_local_SHAP_fold_allocation_summary.csv
+**/RELAX_local_SHAP_run_metadata.json
+
+# RELAX global held-out observation-level outputs and fold-level audit exports.
+**/RELAX_global_SHAP_heldout_values.csv
+**/RELAX_global_SHAP_fold_audit.csv
+**/RELAX_global_SHAP_integrity_checks.csv
+
+# SSAQS held-out predictions, participant/time-linked comparison records and
+# observation-level SHAP exports.
+**/SSAQS_prediction_comparison.csv
+**/SSAQS_global_SHAP_heldout_values.csv
+**/SSAQS_global_SHAP_oof_predictions.csv
+
+# Notebook execution workspaces and archives can contain the restricted files
+# generated above. Keep these local and out of version control.
+**/SSAQS_Global_SHAP_Analysis/
+**/SSAQS_Global_SHAP_outputs.zip
+**/RELAX_Global_SHAP_Controlled_Notebook_Run/
