@@ -186,5 +186,42 @@ class ReleaseTests(unittest.TestCase):
         self.assertEqual(result, "invalid JSON document")
 
 
+
+    def test_invalid_utf8_structured_content_fails_closed(self):
+        result = release_check.inspect_structured_content("export.csv", b"\\xff,score\\nP01,0.4\\n")
+        self.assertEqual(result, "invalid UTF-8 encoding")
+
+    @unittest.skipUnless(shutil.which("git"), "Git unavailable")
+    def test_staged_invalid_utf8_fails_closed(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            subprocess.run(["git", "init", "-q", str(root)], check=True)
+            (root / "export.csv").write_bytes(b"\\xff,score\\nP01,0.4\\n")
+            subprocess.run(["git", "-C", str(root), "add", "export.csv"], check=True)
+            found, note = release_check.staged_findings(root)
+            self.assertIsNone(note)
+            self.assertTrue(any("invalid UTF-8 encoding" in x for x in found))
+
+    @unittest.skipUnless(shutil.which("git"), "Git unavailable")
+    def test_history_checks_restricted_path_when_blob_is_shared(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            subprocess.run(["git", "init", "-q", str(root)], check=True)
+            subprocess.run(["git", "-C", str(root), "config", "user.email",
+                            "test@example.org"], check=True)
+            subprocess.run(["git", "-C", str(root), "config", "user.name",
+                            "Test"], check=True)
+            payload = b"feature,mean_shap\\nfeature_a,0.25\\n"
+            (root / "aggregate.csv").write_bytes(payload)
+            (root / "RELAX_next_morning_stress_dataset.csv").write_bytes(payload)
+            subprocess.run(["git", "-C", str(root), "add", "-A"], check=True)
+            subprocess.run(["git", "-C", str(root), "commit", "-qm", "shared blob paths"],
+                           check=True)
+            found, note = release_check.history_findings(root)
+            self.assertIsNone(note)
+            self.assertTrue(any(
+                "RELAX_next_morning_stress_dataset.csv" in item for item in found
+            ))
+
 if __name__ == "__main__":
     unittest.main()
