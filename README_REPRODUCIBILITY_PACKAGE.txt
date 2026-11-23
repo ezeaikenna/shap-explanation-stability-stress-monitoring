@@ -1,20 +1,23 @@
-# SHAP Explanation Stability — Computational Materials
+# Computational Research Materials
 
-This repository provides computational materials supporting the separate SSAQS and RELAX analyses reported in the associated research manuscript. It contains analysis scripts and notebooks, software and model metadata, fold-level and aggregate results, figures, and numerical comparison results.
+This repository contains computational materials supporting the separate SSAQS and RELAX analyses reported in the associated research. It includes analysis scripts and notebooks, software and model metadata, fold-level and aggregate results, figures, and numerical comparison results.
 
-The repository is organised into three principal analysis components:
+## Organisation
 
 1. `SSAQS_Global_SHAP/` — materials for the SSAQS global SHAP explanation-stability analysis.
-2. `RELAX_Global_SHAP/` — materials for the RELAX global SHAP explanation-stability analysis, including notebook-based numerical reproduction and comparison results.
+2. `RELAX_Global_SHAP/` — materials for the RELAX global SHAP explanation-stability analysis, including numerical reproduction results.
 3. `RELAX_Participant_Level/` — materials for the RELAX participant-level local explanation-stability analysis.
 
-The supplied materials support inspection of the analysis procedures, examination of reported results and numerical reproduction where the required source inputs are available. The original SSAQS and RELAX datasets and the original RELAX questionnaire workbook are not redistributed in this repository. Consequently, the repository does not contain every original input required for a complete end-to-end rerun of all analyses. Users must obtain the relevant source materials separately and comply with their access conditions and licences.
+The materials support examination of the analytical procedures and reported findings, and numerical reproduction where the required source inputs are available. The original SSAQS and RELAX datasets and the original RELAX questionnaire workbook are not redistributed. Users should obtain source materials from the cited repositories and follow the providers' access conditions and licences.
 
-Observation-level prediction and SHAP exports, participant-coded local-stability records and participant-level SHAP value arrays have been excluded to reduce disclosure risk. Aggregate results and supporting documentation are retained.
+Observation-level prediction and SHAP exports, participant-coded local-stability records, and participant-level SHAP value arrays are not included. Aggregate results and supporting documentation are provided.
 
-For detailed descriptions of the analysis materials, software environments, source-data requirements and reproduction limitations, consult `README_Computational_Materials.txt`. For the specific files excluded from the repository, consult `PUBLIC_RELEASE_EXCLUSIONS.txt`.
+For analytical methods, computational environments, source-data requirements and reproduction limitations, consult `README_Computational_Materials.txt`. The categories of excluded data products are described in `PUBLIC_RELEASE_EXCLUSIONS.txt`.
 
+## Data generated during analysis
 
-## Safe execution and release check
+Execution of the notebooks and scripts may generate observation-level or participant-linked files that are not part of this public repository. Such files include reconstructed modelling tables, held-out predictions, individual SHAP values and participant-coded stability records. They should be handled as restricted research data and should not be redistributed as part of this archive.
 
-Running the notebooks and scripts may create local, observation-level or participant-linked outputs that are intentionally not included in this package. The project-specific `.gitignore` rules exclude the known restricted generated files and local analysis workspaces. Before committing or preparing a release, run `python check_public_release.py` and `python -m unittest discover -s tests -v`, inspect `git status --short`, and review every staged file. Inside a Git worktree, the checker examines known file/directory names and sensitive-looking field names in CSV/TSV/JSON/JSONL files, including staged versions. Run `python check_public_release.py --history` to inspect reachable local Git refs for known restricted paths and sensitive-looking fields in historical CSV/TSV/JSON/JSONL blobs. Fetch remote branches first; unfetched refs and other binary formats are not covered. The checker does not inspect all binary formats, remote branches or semantic disclosure risk, and it does not replace privacy and disclosure review. See `PUBLIC_RELEASE_EXCLUSIONS.txt`.
+## Interpretation
+
+SHAP values are predictive attributions and should not be interpreted as causal effects. The SSAQS and RELAX analyses were conducted independently; no cross-dataset model or explanation transfer or external validation was performed. The analyses do not establish clinical validity or unrestricted generalisability.

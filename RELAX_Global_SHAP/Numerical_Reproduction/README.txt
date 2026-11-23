@@ -1,6 +1,6 @@
 RELAX GLOBAL SHAP — NUMERICAL REPRODUCTION
 
-This directory documents the notebook-based numerical reproduction of the RELAX global SHAP analysis. The notebook follows the global-analysis method in PHASE_III_Model_Aligned_SHAP_Stability_FIXED.ipynb and uses the frozen analysis-ready input RELAX_next_morning_stress_dataset.csv (SHA-256: 864b0c9b52f123088f46d932b2daf5bb7410c7932fb5e0e233d6e5c51c5ee5ac). This file is restricted research data, is not included in the repository, and must not be committed or redistributed. It must be obtained or regenerated locally under the applicable data-access conditions. The aggregate run metadata is included alongside this README for reproducibility provenance. The original source dataset is not redistributed; obtain source materials from the original repository and follow its access conditions and licence.
+This directory documents the notebook-based numerical reproduction of the RELAX global SHAP analysis. The notebook follows the global-analysis procedure described in the original RELAX analysis materials and uses the frozen analysis-ready input RELAX_next_morning_stress_dataset.csv (SHA-256: 864b0c9b52f123088f46d932b2daf5bb7410c7932fb5e0e233d6e5c51c5ee5ac). This file is restricted research data and is not included in the repository. It must be obtained or reconstructed locally under the applicable data-access conditions. The original source dataset is not redistributed; obtain source materials from the original repository and follow its access conditions and licence.
 
 The reproduction used Python 3.13.18, NumPy 2.4.6, pandas 3.1.1, SciPy 1.16.3, scikit-learn 1.9.1 and SHAP 0.54.1. Python, pandas, scikit-learn and SHAP match the versions recorded for the original global analysis. The original NumPy and SciPy versions were not documented.
 
@@ -8,4 +8,4 @@ All 16 predefined numerical consistency checks passed. The reproduced held-out S
 
 Archived stability estimates: mean pairwise Spearman = 0.9652504850938761; mean Kendall = 0.8689356257953765; mean top-five Jaccard = 0.5095238095238095.
 
-The archived reference files in the parent RELAX_Global_SHAP directory have been retained unchanged. This reproduction demonstrates agreement with the recorded software versions and archived numerical outputs, but does not establish complete identity of the historical environment because the original NumPy and SciPy versions were not recorded.
+The reproduced results agree with the archived numerical results under the recorded software versions and comparison criteria. Complete identity with the historical computational environment cannot be established because the original NumPy and SciPy versions were not recorded.
