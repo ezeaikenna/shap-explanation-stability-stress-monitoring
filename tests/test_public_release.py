@@ -52,6 +52,22 @@ class ReleaseTests(unittest.TestCase):
         self.assertIn("participantId", result)
         self.assertIn("rowIndex", result)
 
+    def test_jsonl_sensitive_field_in_later_record_detected(self):
+        payload = (
+            b'{"safeField":1}\n'
+            b'{"participantId":"P02","score":0.7}\n'
+        )
+        result = release_check.inspect_structured_content("records.jsonl", payload)
+        self.assertIn("participantId", result)
+
+    def test_malformed_jsonl_record_fails_closed(self):
+        payload = (
+            b'{"safeField":1}\n'
+            b'{"participantId":\n'
+        )
+        result = release_check.inspect_structured_content("records.jsonl", payload)
+        self.assertIn("invalid JSONL record at line 2", result)
+
     def test_large_json_is_inspected_without_truncation(self):
         payload = (
             '{"padding":"' + ("x" * 2_100_000) + '","participantId":"P01"}'

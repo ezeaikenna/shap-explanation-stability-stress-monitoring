@@ -56,15 +56,29 @@ def inspect_structured_content(path_text: str, data: bytes) -> str | None:
             first = next(csv.reader(io.StringIO(text), delimiter="\t" if suffix == ".tsv" else ","), [])
             fields = [str(x) for x in first]
         else:
-            obj = json.loads(text)
             def walk(x):
                 if isinstance(x, dict):
                     fields.extend(map(str, x.keys()))
-                    for v in x.values(): walk(v)
+                    for v in x.values():
+                        walk(v)
                 elif isinstance(x, list):
-                    for v in x: walk(v)
-            walk(obj)
-    except Exception: return None
+                    for v in x:
+                        walk(v)
+
+            if suffix == ".jsonl":
+                # JSON Lines contains one independent JSON value per nonblank line.
+                # Fail closed on malformed records rather than silently skipping them.
+                for line_number, line in enumerate(text.splitlines(), start=1):
+                    if not line.strip():
+                        continue
+                    try:
+                        walk(json.loads(line))
+                    except json.JSONDecodeError:
+                        return f"invalid JSONL record at line {line_number}"
+            else:
+                walk(json.loads(text))
+    except Exception:
+        return None
     hits = sorted({f for f in fields if is_sensitive_field(f)})
     return "sensitive-looking structured field(s): " + ", ".join(hits) if hits else None
 
